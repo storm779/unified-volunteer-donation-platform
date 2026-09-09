@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function profile() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
+    function enabled() { return signedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && profile().disabled == false; }
+    function admin() { return enabled() && profile().role == 'admin'; }
+    function ownsPrivateRecord() {
+      return enabled() && (resource.data.userId == request.auth.uid ||
+        (profile().role == 'organization' && resource.data.organizationId == request.auth.uid) ||
+        profile().role == 'admin');
+    }
+    match /campaigns/{id} { allow read: if true; allow write: if false; }
+    match /opportunities/{id} { allow read: if true; allow write: if false; }
+    match /users/{uid} {
+      allow get: if enabled() && (request.auth.uid == uid || admin());
+      allow list: if admin();
+      allow write: if false;
+    }
+    match /donations/{id} { allow read: if ownsPrivateRecord(); allow write: if false; }
+    match /applications/{id} { allow read: if ownsPrivateRecord(); allow write: if false; }
+    // All writes pass through the authenticated Express API using the Admin SDK.
+    // Payment orders, payment claims, and credentials are never client-readable.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

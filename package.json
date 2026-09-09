@@ -1,0 +1,23 @@
+{
+  "name": "unified-volunteer-donation-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CommonGround — a unified volunteer and donation platform",
+  "scripts": {
+    "dev": "concurrently -n api,web -c green,blue \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "install:all": "npm --prefix client install && npm --prefix server install",
+    "build": "npm --prefix client run build",
+    "test": "npm --prefix server test",
+    "test:e2e": "playwright test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "concurrently": "^9.2.1",
+    "prettier": "^3.9.6"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

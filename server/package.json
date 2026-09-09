@@ -1,0 +1,32 @@
+{
+  "name": "unified-volunteer-donation-platform-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Secure Express API for CommonGround, the Unified Volunteer Donation Platform",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "test": "node --test",
+    "seed": "node scripts/seed.js",
+    "make-admin": "node scripts/make-admin.js",
+    "deploy:rules": "node scripts/deploy-rules.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "firebase-admin": "^13.6.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "razorpay": "^2.9.6",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4"
+  }
+}
