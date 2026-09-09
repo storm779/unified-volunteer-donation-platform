@@ -289,7 +289,7 @@ The browser suite uses an isolated in-memory API on port 5100 and frontend on po
 - Implemented server-created payment orders, signature verification, transaction-based donation updates, and Firestore listeners for real-time campaign and dashboard updates.
 - Organized the application into reusable React components, an authenticated Express API, and interchangeable data adapters, with responsive layouts for desktop and mobile.
 
-These bullets describe the implementation. Add measured performance, scale, or real service validation claims only after collecting that evidence in your own environment.
+These bullets describe the implementation and development. Add measured performance, scale, or real service validation claims only after collecting that evidence in your own environment.
 
 ## License
 
